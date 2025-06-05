@@ -1,10 +1,13 @@
 FROM jupyterhub/jupyterhub:latest
 
+# Installa JupyterLab
+RUN pip install jupyterlab
+
+# Crea utenti sistema
+RUN useradd -m admin && echo "admin:password123" | chpasswd
+
 # Copia configurazione
 COPY jupyterhub_config.py /srv/jupyterhub/
-
-# Crea utente admin nel sistema
-RUN useradd -m admin && echo "admin:daicheandiamoavincerla1990" | chpasswd
 
 EXPOSE 8000
 
